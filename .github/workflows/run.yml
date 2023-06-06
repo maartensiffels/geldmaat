@@ -21,3 +21,8 @@ jobs:
         pip install pandas requests
     - name: Run script
       run: python status_scraper.py
+    - name: Upload output CSV
+      uses: actions/upload-artifact@v2
+      with:
+        name: output-csv
+        path: ./uitvoer.csv
