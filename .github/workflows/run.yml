@@ -1,32 +1,38 @@
 name: Run Python script
 
 on:
-    push:
-    workflow_dispatch:
-    schedule:
-        - cron:  '*/10 * * * *'
+  schedule:
+    # Draait elke dag om middernacht
+    - cron:  '0 0 * * *'
 
-permissions: write-all
- 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.x
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: 3.8
+
     - name: Install dependencies
       run: |
-        pip install pandas requests
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
     - name: Run script
       run: python status_scraper.py
-    - name: Upload output CSV
-      uses: actions/upload-artifact@v2
-      with:
-        name: output-csv
-        path: ./uitvoer_*.csv
-    - name: Print working directory
-      run: pwd
+
+    - name: List files in current directory
+      run: ls -l
+
+    - name: Commit and push
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add .
+        git commit -m "Add CSV output" || exit 0
+        git push
