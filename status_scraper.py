@@ -14,6 +14,9 @@ huidige_tijd = datetime.now().strftime('%Y%m%d_%H%M')
 ## bestandsnaam = f'uitvoer_{huidige_tijd}.csv'
 bestandsnaam = os.path.join(os.getcwd(), f'uitvoer_{huidige_tijd}.csv')
 
+print(f"Het huidige werkdirectory is {os.getcwd()}")
+print(f"Het CSV-bestand wordt gecreëerd op {bestandsnaam}")
+
 # Open een nieuw CSV-bestand om de gegevens weg te schrijven
 with open(bestandsnaam, 'w', newline='') as csvfile:
     veldnamen = ['locatie_id', 'volgnummer', 'apparaat_id', 'type', 'status', 'statusReason']
