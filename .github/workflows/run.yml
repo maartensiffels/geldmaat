@@ -1,11 +1,11 @@
 name: Run Python script
  
 on:
-    push:
-    workflow_dispatch:
+    #push:
+    #workflow_dispatch:
     schedule:
-    # Draait elke dag om middernacht
-    - cron:  '0 0 * * *' 
+    # Draait elke dag om 00,06,12,18 uur
+    - cron:  '0 0,6,12,18 * * * *' 
 
 jobs:
   build:
