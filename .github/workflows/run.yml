@@ -6,6 +6,9 @@ on:
 
 permissions: write-all
 
+name: List directory contents
+run: ls -al
+
 jobs:
     run:
         runs-on: ubuntu-latest
