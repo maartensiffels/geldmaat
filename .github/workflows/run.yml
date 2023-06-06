@@ -1,22 +1,22 @@
-on:
-    push:
-    workflow_dispatch:
-    schedule:
-        - cron:  '*/10 * * * *'
+name: Run Python script
 
-permissions: write-all
+on:
+  schedule:
+    # Draait elke dag om middernacht
+    - cron:  '0 0 * * *'
 
 jobs:
-    run:
-       runs-on: ubuntu-latest
-steps:
-- uses: actions/checkout@v2
-- name: Set up Python
-  uses: actions/setup-python@v2
-  with:
-    python-version: '3.x'
-- name: Install dependencies
-  run: |
-    pip install pandas requests
-- name: Run script
-  run: python status_scraper.py
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        pip install pandas requests
+    - name: Run script
+      run: python status_scraper.py
