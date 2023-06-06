@@ -26,3 +26,5 @@ jobs:
       with:
         name: output-csv
         path: ./uitvoer_*.csv
+    - name: Print working directory
+      run: pwd
