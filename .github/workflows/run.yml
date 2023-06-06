@@ -7,12 +7,11 @@ on:
 permissions: write-all
 
 jobs:
-    run: ls -al
+    run:
         runs-on: ubuntu-latest
         steps:
-            - name: List directory contents
             - uses: actions/setup-python@v3
-            - run: python ./status_scraper.py
+            - run: python status_scraper.py
             - run: |-
                   git config user.name 'GitHub Actions'
                   git config user.email 'actions@users.noreply.github.com'
