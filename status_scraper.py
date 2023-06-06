@@ -4,15 +4,17 @@ import csv
 from datetime import datetime
 
 # Lees het CSV-bestand in
-df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv')
+df = pd.read_csv('/content/Sample_Geldmaat_Locatie_IDs.csv')
 
-# Krijg de huidige tijd en formatteer het als een string
-nu = datetime.now()
-tijdstring = nu.strftime("%Y%m%d_%H%M%S")
+# Creëer een string van de huidige datum en tijd in het formaat 'YYYYMMDD_HHMM'
+huidige_tijd = datetime.now().strftime('%Y%m%d_%H%M')
 
-# Open een nieuw CSV-bestand om de gegevens weg te schrijven, met de huidige tijd in de bestandsnaam
-with open(f'uitvoer_{tijdstring}.csv', 'w', newline='') as csvfile:
-    veldnamen = ['locatie_id', 'volgnummer', 'apparaat_id', 'type', 'status', 'statusReason', 'timestamp']
+# Voeg de huidige tijd toe aan de bestandsnaam
+bestandsnaam = f'uitvoer_{huidige_tijd}.csv'
+
+# Open een nieuw CSV-bestand om de gegevens weg te schrijven
+with open(bestandsnaam, 'w', newline='') as csvfile:
+    veldnamen = ['locatie_id', 'volgnummer', 'apparaat_id', 'type', 'status', 'statusReason']
     schrijver = csv.DictWriter(csvfile, fieldnames=veldnamen)
 
     schrijver.writeheader()
@@ -35,9 +37,6 @@ with open(f'uitvoer_{tijdstring}.csv', 'w', newline='') as csvfile:
         # Verstuur een GET-verzoek naar de URL
         respons = requests.get(url)
 
-        # Vang de huidige tijd op
-        nu = datetime.now()
-
         # Controleer of het verzoek succesvol was
         if respons.status_code == 200:
             # Converteer de respons naar JSON
@@ -53,7 +52,6 @@ with open(f'uitvoer_{tijdstring}.csv', 'w', newline='') as csvfile:
                     # Schrijf de gegevens van het apparaat weg naar het CSV-bestand
                     schrijver.writerow({'locatie_id': data_id, 'volgnummer': f"{volgnummers[data_id]:02d}",
                                         'apparaat_id': apparaat['id'], 'type': apparaat['functionality'], 
-                                        'status': apparaat['deviceState'], 'statusReason': apparaat['depositStatus'],
-                                        'timestamp': nu})
+                                        'status': apparaat['deviceState'], 'statusReason': apparaat['depositStatus']})
             else:
                 print(f"Geen 'devices' gevonden in de data voor id {data_id}")
