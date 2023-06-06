@@ -4,7 +4,7 @@ import csv
 from datetime import datetime
 
 # Lees het CSV-bestand in
-df = pd.read_csv('/content/Sample_Geldmaat_Locatie_IDs.csv')
+df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv')
 
 # Creëer een string van de huidige datum en tijd in het formaat 'YYYYMMDD_HHMM'
 huidige_tijd = datetime.now().strftime('%Y%m%d_%H%M')
