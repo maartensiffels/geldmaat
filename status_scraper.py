@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 import csv
+import os
 from datetime import datetime
 
 # Lees het CSV-bestand in
@@ -10,7 +11,8 @@ df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv')
 huidige_tijd = datetime.now().strftime('%Y%m%d_%H%M')
 
 # Voeg de huidige tijd toe aan de bestandsnaam
-bestandsnaam = f'uitvoer_{huidige_tijd}.csv'
+## bestandsnaam = f'uitvoer_{huidige_tijd}.csv'
+bestandsnaam = os.path.join(os.getcwd(), f'uitvoer_{huidige_tijd}.csv')
 
 # Open een nieuw CSV-bestand om de gegevens weg te schrijven
 with open(bestandsnaam, 'w', newline='') as csvfile:
