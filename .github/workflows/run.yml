@@ -10,12 +10,21 @@ jobs:
     run:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-python@v4
-            - run: python status_scraper.py
+           steps:
+                - uses: actions/checkout@v2
+                - name: Set up Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.x'
+                - name: Install dependencies
+          run: |
+            pip install pandas requests
+                - name: Run script
+          run: python status_scraper.py
             - run: |-
                   git config user.name 'GitHub Actions'
                   git config user.email 'actions@users.noreply.github.com'
                   git add -A
                   git commit -m 'Updates' || exit 0
                   git push
+                  
