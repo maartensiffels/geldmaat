@@ -11,7 +11,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/setup-python@v3
-            - run: status_scraper.py
+            - run: python status_scraper.py
             - run: |-
                   git config user.name 'GitHub Actions'
                   git config user.email 'actions@users.noreply.github.com'
