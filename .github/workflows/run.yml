@@ -29,11 +29,3 @@ jobs:
 
     - name: List files in current directory
       run: ls -l
-
-    - name: Commit and push
-      run: |
-        git config --global user.name 'github-actions'
-        git config --global user.email 'github-actions@github.com'
-        git add .
-        git commit -m "Add CSV output" || exit 0
-        git push
