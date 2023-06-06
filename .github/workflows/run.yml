@@ -31,7 +31,7 @@ jobs:
     - name: Print working directory
       run: pwd
 - name: Commit and push
-  run: |
+  run: |- 
     git config --global user.name 'github-actions'
     git config --global user.email 'github-actions@github.com'
     git add .
