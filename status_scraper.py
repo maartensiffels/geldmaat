@@ -6,7 +6,8 @@ import time
 import random
 
 # Genereer een willekeurig aantal seconden tussen 5 en 10 minuten om detectie scripts te verwarren
-vertraging = random.randint(300, 600)
+# vertraging = random.randint(300, 600)
+vertraging = random.randint(30, 60)
 
 # Pauzeer de uitvoering van het script voor het gespecificeerde aantal seconden
 time.sleep(vertraging)
@@ -14,7 +15,7 @@ time.sleep(vertraging)
 from datetime import datetime
 
 # Lees het CSV-bestand in
-df = pd.read_csv('Geldmaat_Locatie_IDs.csv')
+df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv')
 
 # Creëer een string van de huidige datum en tijd in het formaat 'YYYYMMDD_HHMM'
 huidige_tijd = datetime.now().strftime('%Y%m%d_%H%M')
