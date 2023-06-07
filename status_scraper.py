@@ -21,11 +21,13 @@ df = pd.read_csv('Geldmaat_Locatie_IDs.csv') # PRODUCTIE
 # Creëer een string van de huidige datum en tijd in het formaat 'YYYYMMDD_HHMM'
 huidige_tijd = datetime.now().strftime('%Y%m%d_%H%M')
 
+huidige_cest_tijd = huidige_tijd.astimezone(pytz.timezone('Europe/Amsterdam'))
+
 # Maak de map 'scrapes' als deze nog niet bestaat
 os.makedirs('scrapes', exist_ok=True)
 
 # Voeg de huidige tijd toe aan de bestandsnaam
-bestandsnaam = os.path.join(os.getcwd(), 'scrapes', f'uitvoer_{huidige_tijd}.csv')
+bestandsnaam = os.path.join(os.getcwd(), 'scrapes', f'uitvoer_{huidige_cest_tijd}.csv')
 
 # Open een nieuw CSV-bestand om de gegevens weg te schrijven
 with open(bestandsnaam, 'w', newline='') as csvfile:
