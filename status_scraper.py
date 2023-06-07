@@ -15,8 +15,8 @@ vertraging = random.randint(300, 600) # PRODUCTIE
 time.sleep(vertraging)
 
 # Lees het CSV-bestand in
-df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # PRODUCTIEFILE
-# df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # TESTFILE
+df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # PRODUCTIE
+# df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # TEST
 
 # Creëer een string van de huidige datum en tijd in het formaat 'YYYYMMDD_HHMM'
 huidige_tijd = datetime.now().strftime('%Y%m%d_%H%M')
