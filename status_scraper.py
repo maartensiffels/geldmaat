@@ -8,14 +8,15 @@ import pytz
 from datetime import datetime
 
 # Genereer een willekeurig aantal seconden tussen 5 en 10 minuten om detectie scripts te verwarren
-# vertraging = random.randint(300, 600)
-vertraging = random.randint(30, 60)
+vertraging = random.randint(300, 600) # PRODUCTIE
+# vertraging = random.randint(3, 6) # TEST
 
 # Pauzeer de uitvoering van het script voor het gespecificeerde aantal seconden
 time.sleep(vertraging)
 
 # Lees het CSV-bestand in
-df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv')
+df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # PRODUCTIEFILE
+# df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # TESTFILE
 
 # Creëer een string van de huidige datum en tijd in het formaat 'YYYYMMDD_HHMM'
 huidige_tijd = datetime.now().strftime('%Y%m%d_%H%M')
@@ -25,9 +26,6 @@ os.makedirs('scrapes', exist_ok=True)
 
 # Voeg de huidige tijd toe aan de bestandsnaam
 bestandsnaam = os.path.join(os.getcwd(), 'scrapes', f'uitvoer_{huidige_tijd}.csv')
-
-print(f"Het huidige werkdirectory is {os.getcwd()}")
-print(f"Het CSV-bestand wordt gecreëerd op {bestandsnaam}")
 
 # Open een nieuw CSV-bestand om de gegevens weg te schrijven
 with open(bestandsnaam, 'w', newline='') as csvfile:
