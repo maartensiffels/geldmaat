@@ -18,8 +18,10 @@ time.sleep(vertraging)
 df = pd.read_csv('Geldmaat_Locatie_IDs.csv') # PRODUCTIE
 # df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # TEST
 
-# Creëer een string van de huidige datum en tijd in het formaat 'YYYYMMDD_HHMM'
-huidige_tijd = datetime.now().strftime('%Y%m%d_%H%M')
+# Haal de huidige tijd op en converteer deze naar CEST
+nu = datetime.now()
+cest_tijd = nu.astimezone(pytz.timezone('Europe/Amsterdam'))
+huidige_tijd = cest_tijd.strftime('%Y%m%d_%H%M')
 
 # Maak de map 'scrapes' als deze nog niet bestaat
 os.makedirs('scrapes', exist_ok=True)
