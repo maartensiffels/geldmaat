@@ -4,6 +4,7 @@ import csv
 import os
 import time
 import random
+import pytz
 from datetime import datetime
 
 # Genereer een willekeurig aantal seconden tussen 5 en 10 minuten om detectie scripts te verwarren
@@ -41,8 +42,17 @@ with open(bestandsnaam, 'w', newline='') as csvfile:
         # Haal de data.id op
         data_id = rij['data.id']
 
+        # Genereer een willekeurig aantal seconden tussen 0.1 en 0.2 seconden
+        vertraging = random.uniform(0.1, 0.2)
+
+        # Pauzeer de uitvoering van het script voor het gespecificeerde aantal seconden om detectie te voorkomen
+        time.sleep(vertraging)  
+        
         # Vraag de huidige tijd op
         nu = datetime.now()
+
+        # Converteer de UTC tijd naar CEST
+        cest_tijd = nu.astimezone(pytz.timezone('Europe/Amsterdam'))
         
         # Initialiseer de teller voor dit data_id als dit de eerste keer is dat we het zien
         if data_id not in volgnummers:
@@ -70,6 +80,6 @@ with open(bestandsnaam, 'w', newline='') as csvfile:
                     schrijver.writerow({'locatie_id': data_id, 'volgnummer': f"{volgnummers[data_id]:02d}",
                                         'apparaat_id': apparaat['id'], 'type': apparaat['functionality'], 
                                         'status': apparaat['deviceState'], 'statusReason': apparaat['depositStatus'],
-                                        'timestamp': nu})
+                                        'timestamp': cest_tijd})
             else:
                 print(f"Geen 'devices' gevonden in de data voor id {data_id}")
