@@ -2,6 +2,15 @@ import pandas as pd
 import requests
 import csv
 import os
+import time
+import random
+
+# Genereer een willekeurig aantal seconden tussen 5 en 10 minuten om detectie scripts te verwarren
+vertraging = random.randint(300, 600)
+
+# Pauzeer de uitvoering van het script voor het gespecificeerde aantal seconden
+time.sleep(vertraging)
+
 from datetime import datetime
 
 # Lees het CSV-bestand in
@@ -19,7 +28,7 @@ print(f"Het CSV-bestand wordt gecreëerd op {bestandsnaam}")
 
 # Open een nieuw CSV-bestand om de gegevens weg te schrijven
 with open(bestandsnaam, 'w', newline='') as csvfile:
-    veldnamen = ['locatie_id', 'volgnummer', 'apparaat_id', 'type', 'status', 'statusReason']
+    veldnamen = ['locatie_id', 'volgnummer', 'apparaat_id', 'type', 'status', 'statusReason', 'timestamp']]
     schrijver = csv.DictWriter(csvfile, fieldnames=veldnamen)
 
     schrijver.writeheader()
@@ -32,6 +41,9 @@ with open(bestandsnaam, 'w', newline='') as csvfile:
         # Haal de data.id op
         data_id = rij['data.id']
 
+        # Vraag de huidige tijd op
+        nu = datetime.now()
+        
         # Initialiseer de teller voor dit data_id als dit de eerste keer is dat we het zien
         if data_id not in volgnummers:
             volgnummers[data_id] = 0
@@ -57,6 +69,7 @@ with open(bestandsnaam, 'w', newline='') as csvfile:
                     # Schrijf de gegevens van het apparaat weg naar het CSV-bestand
                     schrijver.writerow({'locatie_id': data_id, 'volgnummer': f"{volgnummers[data_id]:02d}",
                                         'apparaat_id': apparaat['id'], 'type': apparaat['functionality'], 
-                                        'status': apparaat['deviceState'], 'statusReason': apparaat['depositStatus']})
+                                        'status': apparaat['deviceState'], 'statusReason': apparaat['depositStatus'],
+                                        'timestamp': nu})
             else:
                 print(f"Geen 'devices' gevonden in de data voor id {data_id}")
