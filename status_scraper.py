@@ -53,6 +53,7 @@ with open(bestandsnaam, 'w', newline='') as csvfile:
 
         # Converteer de UTC tijd naar CEST
         cest_tijd = nu.astimezone(pytz.timezone('Europe/Amsterdam'))
+        geformatteerde_tijd = cest_tijd.strftime('%Y-%m-%d %H:%M:%S')
         
         # Initialiseer de teller voor dit data_id als dit de eerste keer is dat we het zien
         if data_id not in volgnummers:
@@ -80,6 +81,6 @@ with open(bestandsnaam, 'w', newline='') as csvfile:
                     schrijver.writerow({'locatie_id': data_id, 'volgnummer': f"{volgnummers[data_id]:02d}",
                                         'apparaat_id': apparaat['id'], 'type': apparaat['functionality'], 
                                         'status': apparaat['deviceState'], 'statusReason': apparaat['depositStatus'],
-                                        'timestamp': cest_tijd})
+                                        'timestamp': geformatteerde_tijd})
             else:
                 print(f"Geen 'devices' gevonden in de data voor id {data_id}")
