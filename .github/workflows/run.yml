@@ -4,8 +4,8 @@ on:
     push:
     workflow_dispatch:
     schedule:
-    # Draait elke dag om 06,12,18 en 24 uur NL-tijd (hieronder in UTC)
-    - cron:  '0 4,10,16,22 * * *'
+    # Draait elke dag om 10,15 en 20 uur NL-tijd (hieronder in UTC)
+    - cron:  '0 8,13,18 * * *'
 
 jobs:
   build:
