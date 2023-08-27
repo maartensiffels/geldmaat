@@ -8,8 +8,8 @@ import pytz
 from datetime import datetime
 
 # Lees het CSV-bestand in
-# df = pd.read_csv('Geldmaat_Locatie_IDs.csv') # PRODUCTIE
-df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # TEST
+df = pd.read_csv('Geldmaat_Locatie_IDs.csv') # PRODUCTIE
+# df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # TEST
 
 # Haal de huidige tijd op en converteer deze naar CEST
 nu = datetime.now()
