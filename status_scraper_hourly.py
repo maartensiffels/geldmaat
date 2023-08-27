@@ -7,27 +7,26 @@ import random
 import pytz
 from datetime import datetime
 
-# Genereer een willekeurig aantal seconden tussen 5 en 10 minuten om detectie scripts te verwarren
-vertraging = random.randint(300, 600) # PRODUCTIE
-# vertraging = random.randint(3, 6) # TEST
+# Genereer een willekeurig aantal seconden tussen 1 en 5 minuten om detectie scripts te verwarren
+# vertraging = random.randint(60, 300) # PRODUCTIE
 
 # Pauzeer de uitvoering van het script voor het gespecificeerde aantal seconden
 time.sleep(vertraging)
 
 # Lees het CSV-bestand in
-df = pd.read_csv('Geldmaat_Locatie_IDs.csv') # PRODUCTIE
-# df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # TEST
+# df = pd.read_csv('Geldmaat_Locatie_IDs.csv') # PRODUCTIE
+df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # TEST
 
 # Haal de huidige tijd op en converteer deze naar CEST
 nu = datetime.now()
 cest_tijd = nu.astimezone(pytz.timezone('Europe/Amsterdam'))
 huidige_tijd = cest_tijd.strftime('%Y%m%d_%H%M')
 
-# Maak de map 'scrapes' als deze nog niet bestaat
-os.makedirs('scrapes', exist_ok=True)
+# Maak de map 'scrapes_hourly' als deze nog niet bestaat
+os.makedirs('scrapes_hourly', exist_ok=True)
 
 # Voeg de huidige tijd toe aan de bestandsnaam
-bestandsnaam = os.path.join(os.getcwd(), 'scrapes', f'uitvoer_{huidige_tijd}.csv')
+bestandsnaam = os.path.join(os.getcwd(), 'scrapes_hourly', f'uitvoer_{huidige_tijd}.csv')
 
 # Open een nieuw CSV-bestand om de gegevens weg te schrijven
 with open(bestandsnaam, 'w', newline='') as csvfile:
