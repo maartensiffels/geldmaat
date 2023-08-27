@@ -1,8 +1,8 @@
-name: Run Python script 
+name: Run Status Scrape Hourly
  
 on:
     # push:
-    # workflow_dispatch:
+    workflow_dispatch:
     schedule:
     - cron:  '0 * * * *'
 
