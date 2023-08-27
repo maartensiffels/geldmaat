@@ -7,12 +7,6 @@ import random
 import pytz
 from datetime import datetime
 
-# Genereer een willekeurig aantal seconden tussen 1 en 5 minuten om detectie scripts te verwarren
-# vertraging = random.randint(60, 300) # PRODUCTIE
-
-# Pauzeer de uitvoering van het script voor het gespecificeerde aantal seconden
-time.sleep(vertraging)
-
 # Lees het CSV-bestand in
 # df = pd.read_csv('Geldmaat_Locatie_IDs.csv') # PRODUCTIE
 df = pd.read_csv('Sample_Geldmaat_Locatie_IDs.csv') # TEST
