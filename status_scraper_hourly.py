@@ -55,7 +55,7 @@ with open(bestandsnaam, 'w', newline='') as csvfile:
             volgnummers[data_id] = 0
 
         # Stel de URL samen
-        url = f"https://ii0d2f1pfc.execute-api.eu-west-1.amazonaws.com/prod/locations/{data_id}"
+        url = f"https://api.prod.locator-backend.geldmaat.nl/locations/{data_id}"
 
         # Verstuur een GET-verzoek naar de URL
         respons = requests.get(url)
